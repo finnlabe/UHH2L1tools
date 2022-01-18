@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd"[
+
+<!ENTITY inpath SYSTEM "/nfs/dust/cms/user/flabe/L1Trigger/data/xmlfiles/MC_L1_MinBias.xml">
+<!ENTITY outpath "/nfs/dust/cms/user/flabe/L1Trigger/data/root/">
+<!ENTITY outfilename "MC_L1_MinBias_2018.xml">
+
+]>
+
+<!-- OutputLevel controls which messages are printed; set to VERBOSE or DEBUG for more verbosity, to WARNING or ERROR for less -->
+<JobConfiguration JobName="ExampleCycleJob" OutputLevel="INFO">
+    <Library Name="libSUHH2UHH2L1tools"/>
+    <Package Name="SUHH2UHH2L1tools.par" />
+
+   <Cycle Name="uhh2::AnalysisModuleRunner" OutputDirectory="&outpath;/" PostFix="" TargetLumi="1" >
+
+        <!-- Verion attribute must have year in it, same as used in ntuple config, e.g. 2018, 2016v3, etc -->
+        <InputData Lumi="1" NEventsMax="-1" Type="MC" Version="&outfilename;" Cacheable="False">
+            &inpath;
+            <InputTree Name="AnalysisTree" />
+            <OutputTree Name="AnalysisTree" />
+        </InputData>
+
+        <UserConfig>
+
+            <!-- saving L1 information -->
+            <Item Name="additionalBranches" Value="L1Jet_seeds L1Muon_seeds L1EGamma_seeds L1EtSum_seeds" />
+
+            <!-- the class name of the AnalysisModule subclasses to run: -->
+            <Item Name="AnalysisModule" Value="UHH2L1toolsModule" />
+
+
+        </UserConfig>
+    </Cycle>
+</JobConfiguration>
