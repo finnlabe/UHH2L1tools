@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd"[
 
+<!-- enter input path, output path and output name here -->
+<!-- please set the appropriate type as well. Note that MinBias needs to be considered "DATA" for some reason -->
 <!ENTITY inpath SYSTEM "/nfs/dust/cms/user/flabe/L1Trigger/data/xmlfiles/MC_L1_MinBias.xml">
 <!ENTITY outpath "/nfs/dust/cms/user/flabe/L1Trigger/data/root/">
 <!ENTITY outfilename "MC_L1_MinBias_2018.xml">
+<!ENTITY type "DATA">
+
 
 ]>
 
@@ -15,7 +19,7 @@
    <Cycle Name="uhh2::AnalysisModuleRunner" OutputDirectory="&outpath;/" PostFix="" TargetLumi="1" >
 
         <!-- Verion attribute must have year in it, same as used in ntuple config, e.g. 2018, 2016v3, etc -->
-        <InputData Lumi="1" NEventsMax="-1" Type="MC" Version="&outfilename;" Cacheable="False">
+        <InputData Lumi="1" NEventsMax="-1" Type="&type;" Version="&outfilename;" Cacheable="False">
             &inpath;
             <InputTree Name="AnalysisTree" />
             <OutputTree Name="AnalysisTree" />

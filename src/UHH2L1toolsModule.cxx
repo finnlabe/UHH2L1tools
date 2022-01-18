@@ -7,8 +7,6 @@
 using namespace std;
 using namespace uhh2;
 
-namespace uhh2examples {
-
   /** \brief UHH module to prepare conversion to DF for L1 triggers
    *
    */
@@ -41,14 +39,10 @@ namespace uhh2examples {
 
   bool UHH2L1toolsModule::process(Event & event) {
 
-    std::cout << "processing event"  << std::endl;
-
     // outputting the weight to the AnalysisTree
     event.set(h_evt_weight, event.weight);
 
     return true;
   }
 
-  UHH2_REGISTER_ANALYSIS_MODULE(UHH2L1toolsModule)
-
-}
+UHH2_REGISTER_ANALYSIS_MODULE(UHH2L1toolsModule)
